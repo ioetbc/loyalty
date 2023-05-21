@@ -3,6 +3,8 @@ import * as Google from "expo-auth-session/providers/google";
 import {GoogleAuthProvider, getAuth, signInWithCredential} from "firebase/auth";
 import Constants from "expo-constants";
 import {AuthenticationContext} from "../context/auth-context";
+import {collection, doc, setDoc} from "firebase/firestore";
+import {db} from "../firebase-config";
 
 const auth = getAuth();
 
@@ -24,6 +26,27 @@ export function useAuthentication() {
   const login = async (accessToken: string) => {
     const credential = GoogleAuthProvider.credential(null, accessToken);
     const {user} = await signInWithCredential(auth, credential);
+
+    try {
+      const userDocRef = doc(db, "users", user.uid);
+
+      await setDoc(userDocRef, {
+        username: user.displayName,
+        email: user.email,
+      });
+
+      const merchantDocRef = doc(collection(userDocRef, "merchants"), "crains");
+
+      await setDoc(merchantDocRef, {
+        current_card: 6,
+        complete_cards: 1,
+      });
+
+      console.log("Document written for user: ", user.uid);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
     setUser(user);
   };
 
