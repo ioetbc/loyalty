@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "loyalty",
+    "slug": "loyalty",
+    "scheme": "loyalty",
+    "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
+    "android": {
+      "package": "com.ioetbc.loyalty"
+    },
+    "ios": {
+      "bundleIdentifier": "com.ioetbc.loyalty"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "51d265b8-f0eb-4e67-a530-0ea561515f98"
+      }
+    }
+  }
+}
