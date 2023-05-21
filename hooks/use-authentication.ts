@@ -1,10 +1,18 @@
 import {useEffect, useContext} from "react";
 import * as Google from "expo-auth-session/providers/google";
 import {GoogleAuthProvider, getAuth, signInWithCredential} from "firebase/auth";
+// import {FieldValue} from "firebase-admin/firestore";
 import Constants from "expo-constants";
 import {AuthenticationContext} from "../context/auth-context";
-import {collection, doc, setDoc} from "firebase/firestore";
+import {
+  collection,
+  doc,
+  increment,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import {db} from "../firebase-config";
+import {MERCHANT} from "../constants";
 
 const auth = getAuth();
 
@@ -35,11 +43,10 @@ export function useAuthentication() {
         email: user.email,
       });
 
-      const merchantDocRef = doc(collection(userDocRef, "merchants"), "crains");
+      const merchantDocRef = doc(collection(userDocRef, "merchants"), MERCHANT);
 
-      await setDoc(merchantDocRef, {
-        current_card: 6,
-        complete_cards: 1,
+      await updateDoc(merchantDocRef, {
+        count: increment(1),
       });
 
       console.log("Document written for user: ", user.uid);
