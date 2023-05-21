@@ -9,6 +9,9 @@
       "package": "com.ioetbc.loyalty"
     },
     "ios": {
+      "config": {
+        "usesNonExemptEncryption": false
+      },
       "bundleIdentifier": "com.ioetbc.loyalty"
     },
     "extra": {
