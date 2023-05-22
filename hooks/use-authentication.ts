@@ -1,7 +1,6 @@
 import {useEffect, useContext} from "react";
 import * as Google from "expo-auth-session/providers/google";
 import {GoogleAuthProvider, getAuth, signInWithCredential} from "firebase/auth";
-// import {FieldValue} from "firebase-admin/firestore";
 import Constants from "expo-constants";
 import {AuthenticationContext} from "../context/auth-context";
 import {

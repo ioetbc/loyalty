@@ -3,6 +3,9 @@ import "dotenv/config";
 module.exports = {
   name: "loyalty",
   version: "1.0.0",
+  ios: {
+    bundleIdentifier: "com.ioetbc.loyalty",
+  },
   extra: {
     iosClient: process.env.IOS_CLIENT_ID,
     androidlient: process.env.ANDROID_CLIENT_ID,
